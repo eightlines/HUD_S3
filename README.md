@@ -20,12 +20,12 @@ ESP-IDF firmware and host streaming/upload tools for turning a **LILYGO T-Displa
 ## Quick Start (ESP-IDF on Windows)
 
 1. Open **ESP-IDF PowerShell / Command Prompt** and navigate to this project.
-2. (Optional) Configure Wi-Fi credentials or HUD defaults:
+2. (Optional) Configure Wi-Fi credentials via environment variables (recommended so secrets stay out of git), or via `idf.py menuconfig`:
    ```powershell
-   idf.py set-target esp32s3
-   idf.py menuconfig
+   $env:HUD_WIFI_SSID="YourWiFiName"
+   $env:HUD_WIFI_PASSWORD="YourWiFiPassword"
    ```
-   *(If you leave Wi-Fi SSID empty, the board creates an open SoftAP named `HUD-S3` at `192.168.4.1`.)*
+   *(If left unset, the board creates an open SoftAP named `HUD-S3` at `192.168.4.1`.)*
 3. Build, flash, and monitor:
    ```powershell
    idf.py build flash monitor

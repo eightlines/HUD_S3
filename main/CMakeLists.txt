@@ -18,3 +18,10 @@ idf_component_register(
         spiffs
         lwip
 )
+
+if(DEFINED ENV{HUD_WIFI_SSID} AND NOT "$ENV{HUD_WIFI_SSID}" STREQUAL "")
+    target_compile_definitions(${COMPONENT_LIB} PRIVATE
+        HUD_ENV_WIFI_SSID="$ENV{HUD_WIFI_SSID}"
+        HUD_ENV_WIFI_PASSWORD="$ENV{HUD_WIFI_PASSWORD}"
+    )
+endif()

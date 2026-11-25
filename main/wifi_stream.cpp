@@ -151,6 +151,7 @@ static esp_err_t handle_upload(httpd_req_t *req) {
 static void start_webserver(void) {
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
     config.stack_size = 8192;
+    config.lru_purge_enable = true;
     if (httpd_start(&s_httpd, &config) != ESP_OK) {
         ESP_LOGE(TAG, "Failed to start HTTP server");
         return;
@@ -254,8 +255,17 @@ esp_err_t wifi_stream_init(const hud_callbacks_t *cbs) {
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
 
+#ifdef HUD_ENV_WIFI_SSID
+    const char *ssid = HUD_ENV_WIFI_SSID;
+#ifdef HUD_ENV_WIFI_PASSWORD
+    const char *pass = HUD_ENV_WIFI_PASSWORD;
+#else
+    const char *pass = "";
+#endif
+#else
     const char *ssid = CONFIG_HUD_WIFI_SSID;
     const char *pass = CONFIG_HUD_WIFI_PASSWORD;
+#endif
 
     if (strlen(ssid) > 0) {
         esp_netif_create_default_wifi_sta();
