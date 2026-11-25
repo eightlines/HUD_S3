@@ -1,0 +1,40 @@
+menu "HUD S3 Configuration"
+
+    config HUD_WIFI_SSID
+        string "Wi-Fi SSID (leave empty for SoftAP mode)"
+        default ""
+        help
+            SSID of the Wi-Fi network to join. If left empty, the device creates a SoftAP named "HUD-S3".
+
+    config HUD_WIFI_PASSWORD
+        string "Wi-Fi Password"
+        default ""
+        help
+            Password for the Wi-Fi network (or SoftAP if SSID is empty, min 8 chars or empty for open AP).
+
+    config HUD_DEFAULT_BRIGHTNESS
+        int "Default AMOLED Brightness (0-255)"
+        range 0 255
+        default 220
+        help
+            Initial hardware brightness for the RM67162 AMOLED panel.
+
+    config HUD_MIRROR_X
+        bool "Mirror Horizontally by Default (for Beamsplitter HUD)"
+        default y
+        help
+            Reflects the image horizontally via RM67162 MADCTL so it reads correctly in a 45-degree beamsplitter.
+
+    config HUD_MIRROR_Y
+        bool "Mirror Vertically by Default"
+        default n
+        help
+            Reflects the image vertically via RM67162 MADCTL.
+
+    config HUD_LANDSCAPE
+        bool "Landscape Orientation (536x240 instead of 240x536)"
+        default n
+        help
+            Rotates the display 90 degrees into 536x240 landscape mode.
+
+endmenu

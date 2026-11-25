@@ -1,0 +1,20 @@
+idf_component_register(
+    SRCS
+        "app_main.cpp"
+        "rm67162.cpp"
+        "hud_renderer.cpp"
+        "framepack.cpp"
+        "wifi_stream.cpp"
+        "usb_stream.cpp"
+    INCLUDE_DIRS "."
+    REQUIRES
+        driver
+        esp_timer
+        esp_wifi
+        esp_event
+        esp_netif
+        esp_http_server
+        nvs_flash
+        spiffs
+        lwip
+)
